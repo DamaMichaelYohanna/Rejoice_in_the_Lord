@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../data/hymns_data.dart';
 import '../models/hymn.dart';
 import '../theme/app_theme.dart';
@@ -29,6 +30,68 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _allHymns = HymnsData.getAllHymns();
     _applyFilters();
+    _checkAndShowAdNoticeDialog();
+  }
+
+  void _checkAndShowAdNoticeDialog() async {
+    final prefs = await SharedPreferences.getInstance();
+    bool hasSeen = prefs.getBool("has_seen_ad_notice_popup") ?? false;
+    if (!hasSeen && mounted) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showAdNoticePopup(prefs);
+      });
+    }
+  }
+
+  void _showAdNoticePopup(SharedPreferences prefs) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: const Row(
+          children: [
+            Icon(Icons.volunteer_activism, color: AppTheme.cyanPrimary),
+            SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                "App Support & Ads Notice",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+        content: const Text(
+          "Welcome to Rejoice in the Lord Catholic Hymnbook!\n\nTo help maintain this application, support future updates, and keep all 700 hymns free for everyone, non-intrusive banner ads are shown at the bottom of pages, and full-screen ads are strictly limited to 2 per day.\n\nThank you for your support!",
+          style: TextStyle(fontSize: 14, height: 1.4),
+        ),
+        actions: [
+          SizedBox(
+            width: double.infinity,
+            height: 44,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppTheme.cyanPrimary,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              onPressed: () async {
+                await prefs.setBool("has_seen_ad_notice_popup", true);
+                if (context.mounted) {
+                  Navigator.of(context).pop();
+                }
+              },
+              child: const Text(
+                "OK, I UNDERSTAND",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   void _applyFilters() {
