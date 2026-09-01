@@ -186,7 +186,39 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                               ),
                             ),
                           ),
-                          const SizedBox(height: 48),
+                          const SizedBox(height: 16),
+                          // Ad Transparency Notice
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 36),
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                            decoration: BoxDecoration(
+                              color: Colors.black.withValues(alpha: 0.25),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: Colors.white.withValues(alpha: 0.2),
+                                width: 1,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Icon(Icons.info_outline, size: 14, color: Colors.white70),
+                                const SizedBox(width: 8),
+                                const Flexible(
+                                  child: Text(
+                                    "Supported by ads to help maintain & keep the hymnal free.",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 36),
                           // Subtle Progress Indicator
                           const SizedBox(
                             width: 24,
@@ -198,6 +230,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                           ),
                         ],
                       ),
+
                     ),
                   );
                 },
