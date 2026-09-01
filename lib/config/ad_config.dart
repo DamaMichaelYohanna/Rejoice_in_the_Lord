@@ -2,27 +2,26 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 
 class AdConfig {
-  // Flag to toggle between Test Ads and Production Ads
-  static const bool useTestAds = true;
+  // Set to false for Production live ads, true for Google Test Ads
+  static const bool useTestAds = false;
 
   // ===========================================================================
   // YOUR ADMOB PRODUCTION APP & AD UNIT IDS
-  // Replace the strings below with your actual AdMob IDs from the AdMob Console.
   // ===========================================================================
 
   // Production Banner Ad Unit IDs
-  static const String _androidProdBannerUnitId = "ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX";
-  static const String _iosProdBannerUnitId = "ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX";
+  static const String _androidProdBannerUnitId = "ca-app-pub-5231324721259764/1918098157";
+  static const String _iosProdBannerUnitId = "ca-app-pub-5231324721259764/1918098157";
 
   // Production Interstitial Ad Unit IDs
-  static const String _androidProdInterstitialUnitId = "ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX";
-  static const String _iosProdInterstitialUnitId = "ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX";
+  static const String _androidProdInterstitialUnitId = "ca-app-pub-5231324721259764/3961807569";
+  static const String _iosProdInterstitialUnitId = "ca-app-pub-5231324721259764/3961807569";
 
-  // Android Production App ID (Place in AndroidManifest.xml)
-  static const String androidAppId = "ca-app-pub-XXXXXXXXXXXXXXXX~XXXXXXXXXX";
+  // Android Production App ID
+  static const String androidAppId = "ca-app-pub-5231324721259764~1718787603";
 
-  // iOS Production App ID (Place in Info.plist)
-  static const String iosAppId = "ca-app-pub-XXXXXXXXXXXXXXXX~XXXXXXXXXX";
+  // iOS Production App ID
+  static const String iosAppId = "ca-app-pub-5231324721259764~1718787603";
 
   // ===========================================================================
   // GOOGLE OFFICIAL TEST UNIT IDS (Safe for development and testing)
