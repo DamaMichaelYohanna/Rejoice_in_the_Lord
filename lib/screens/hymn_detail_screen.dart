@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/hymn.dart';
+import '../services/interstitial_ad_manager.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_footer.dart';
-
 
 class HymnDetailScreen extends StatefulWidget {
   final Hymn hymn;
@@ -28,7 +28,9 @@ class _HymnDetailScreenState extends State<HymnDetailScreen> {
   void initState() {
     super.initState();
     _currentHymn = widget.hymn;
+    InterstitialAdManager().registerHymnView();
   }
+
 
   void _navigateToHymnOffset(int delta) {
     int currentIndex = widget.allHymns.indexWhere((h) => h.id == _currentHymn.id);
@@ -51,9 +53,17 @@ class _HymnDetailScreenState extends State<HymnDetailScreen> {
     bool hasPrev = currentIndex > 0;
     bool hasNext = currentIndex < widget.allHymns.length - 1;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Hymn #${_currentHymn.number}"),
+    return PopScope(
+      canPop: true,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
+          InterstitialAdManager().tryShowAd();
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Hymn #${_currentHymn.number}"),
+
         actions: [
           IconButton(
             icon: Icon(_fontSize > 18 ? Icons.text_fields : Icons.format_size),
@@ -252,8 +262,10 @@ class _HymnDetailScreenState extends State<HymnDetailScreen> {
         ),
       ),
       bottomNavigationBar: const BannerAdFooter(),
-    );
-  }
+    ),
+  );
+}
+
 
 
   Widget _buildRefrainCard(String refrainText, bool isDark) {
