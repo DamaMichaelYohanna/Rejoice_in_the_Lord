@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/hymn.dart';
 import '../theme/app_theme.dart';
+import '../widgets/banner_ad_footer.dart';
+
 
 class HymnDetailScreen extends StatefulWidget {
   final Hymn hymn;
@@ -249,8 +251,10 @@ class _HymnDetailScreenState extends State<HymnDetailScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: const BannerAdFooter(),
     );
   }
+
 
   Widget _buildRefrainCard(String refrainText, bool isDark) {
     return Container(

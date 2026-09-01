@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import '../data/hymns_data.dart';
 import '../models/hymn.dart';
 import '../theme/app_theme.dart';
+import '../widgets/banner_ad_footer.dart';
 import '../widgets/hymn_card.dart';
 import '../widgets/quick_number_dialog.dart';
 import 'hymn_detail_screen.dart';
 import 'mass_program_screen.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -310,7 +312,9 @@ class _HomeScreenState extends State<HomeScreen> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
+      bottomNavigationBar: const BannerAdFooter(),
     );
+
   }
 
   Widget _buildListView() {

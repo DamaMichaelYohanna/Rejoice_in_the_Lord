@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../models/hymn.dart';
 import '../theme/app_theme.dart';
+import '../widgets/banner_ad_footer.dart';
 import 'hymn_detail_screen.dart';
+
 
 class MassProgramScreen extends StatefulWidget {
   final List<Hymn> allHymns;
@@ -195,8 +197,10 @@ class _MassProgramScreenState extends State<MassProgramScreen> {
           ),
         ],
       ),
+      bottomNavigationBar: const BannerAdFooter(),
     );
   }
+
 
   Widget _buildSlotCard({
     required String title,
