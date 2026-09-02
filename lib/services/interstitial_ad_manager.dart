@@ -11,20 +11,17 @@ class InterstitialAdManager {
   InterstitialAd? _interstitialAd;
   bool _isAdLoading = false;
 
-  int _hymnViewCount = 0;
-
-  // Dynamic Limits: Relaxed in test mode to allow verification, strict in production
-  int get maxAdsPerDay => AdConfig.useTestAds ? 999 : 2;
-  int get minHymnsBeforeAd => AdConfig.useTestAds ? 1 : 5;
+  // Strict Limit: Only 2 interstitial ads per day per user
+  static const int maxAdsPerDay = 2;
 
   static const String _keyAdDate = "interstitial_ad_last_date";
   static const String _keyAdCount = "interstitial_ad_daily_count";
 
-  /// Call this when the app initializes to preload the first interstitial ad
+  /// Call this when the app initializes or whenever needed to preload an ad
   void preloadAd() async {
     if (kIsWeb || _isAdLoading || _interstitialAd != null) return;
 
-    // Check if daily quota is already reached before loading from network
+    // Check if daily quota (max 2/day) is already reached before loading
     bool isQuotaReached = await _isDailyQuotaReached();
     if (isQuotaReached) {
       debugPrint('ℹ️ [AdMob] Daily interstitial quota reached ($maxAdsPerDay/day). Skipping preload.');
@@ -51,9 +48,8 @@ class InterstitialAdManager {
     );
   }
 
-  /// Call this whenever a user opens/views a hymn
+  /// Call this whenever a user opens a hymn to ensure an ad is preloaded
   void registerHymnView() {
-    _hymnViewCount++;
     if (_interstitialAd == null && !_isAdLoading) {
       preloadAd();
     }
@@ -68,7 +64,7 @@ class InterstitialAdManager {
     final int savedCount = prefs.getInt(_keyAdCount) ?? 0;
 
     if (savedDate != todayStr) {
-      // New calendar day: reset counter
+      // New calendar day: reset counter to 0
       await prefs.setString(_keyAdDate, todayStr);
       await prefs.setInt(_keyAdCount, 0);
       return false;
@@ -97,20 +93,22 @@ class InterstitialAdManager {
     savedCount++;
     await prefs.setString(_keyAdDate, todayStr);
     await prefs.setInt(_keyAdCount, savedCount);
+    debugPrint('ℹ️ [AdMob] Interstitial ads shown today: $savedCount / $maxAdsPerDay');
   }
 
-  /// Attempts to display an interstitial ad if daily limit and hymn count allow
+  /// Attempts to display an interstitial ad any time, capped at strictly 2 ads per day
   void tryShowAd({VoidCallback? onAdClosed}) async {
     bool quotaReached = await _isDailyQuotaReached();
 
-    debugPrint('ℹ️ [AdMob] tryShowAd requested: views=$_hymnViewCount/$minHymnsBeforeAd, adReady=${_interstitialAd != null}, quotaReached=$quotaReached');
+    debugPrint('ℹ️ [AdMob] tryShowAd called: adReady=${_interstitialAd != null}, quotaReached=$quotaReached');
 
     if (quotaReached) {
+      debugPrint('ℹ️ [AdMob] Daily limit reached ($maxAdsPerDay/day). No ad shown.');
       if (onAdClosed != null) onAdClosed();
       return;
     }
 
-    if (_hymnViewCount >= minHymnsBeforeAd && _interstitialAd != null) {
+    if (_interstitialAd != null) {
       _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
         onAdShowedFullScreenContent: (ad) {
           debugPrint('🟢 [AdMob] Interstitial Ad showing full screen.');
@@ -119,7 +117,6 @@ class InterstitialAdManager {
           debugPrint('ℹ️ [AdMob] Interstitial Ad dismissed by user.');
           ad.dispose();
           _interstitialAd = null;
-          _hymnViewCount = 0;
           await _recordAdShown();
           preloadAd();
           if (onAdClosed != null) onAdClosed();
@@ -135,7 +132,7 @@ class InterstitialAdManager {
 
       _interstitialAd!.show();
     } else {
-      if (_interstitialAd == null && !_isAdLoading) {
+      if (!_isAdLoading) {
         preloadAd();
       }
       if (onAdClosed != null) onAdClosed();
