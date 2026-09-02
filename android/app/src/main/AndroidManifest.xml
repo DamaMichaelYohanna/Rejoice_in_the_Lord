@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="rejoice_in_the_lord"
+        android:label="Rejoice in the Lord"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

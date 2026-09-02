@@ -31,6 +31,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+/android/build/
 /coverage/
 
 # Symbolication related
@@ -46,3 +47,9 @@ app.*.map.json
 
 # Local backups
 backups/
+
+# Android signing keys & credentials
+*.jks
+*.keystore
+key.properties
+**/android/key.properties

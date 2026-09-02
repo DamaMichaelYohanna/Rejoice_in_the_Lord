@@ -1,0 +1,11 @@
+# Android Keystore Configuration Template
+# Fill in your own values below.
+# storeFile can be:
+#   1) Just the filename if placed in the android/app folder (e.g., upload-keystore.jks)
+#   2) A relative path from android/ (e.g., app/upload-keystore.jks or upload-keystore.jks)
+#   3) An absolute path (e.g., C:/Users/Dama-PC/upload-keystore.jks)
+
+storePassword=YOUR_KEYSTORE_PASSWORD_HERE
+keyPassword=YOUR_KEY_PASSWORD_HERE
+keyAlias=YOUR_KEY_ALIAS_HERE
+storeFile=upload-keystore.jks
