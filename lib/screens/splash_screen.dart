@@ -136,24 +136,24 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                                 borderRadius: BorderRadius.circular(22),
                                 child: Image.asset(
                                   'assets/images/cover.jpg',
-                                  width: 250,
-                                  height: 330,
+                                  width: 260,
+                                  height: 260,
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) {
                                     return Container(
-                                      width: 250,
-                                      height: 330,
+                                      width: 260,
+                                      height: 260,
                                       color: Colors.white,
                                       child: const Column(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          Icon(Icons.music_note, size: 80, color: AppTheme.cyanPrimary),
-                                          SizedBox(height: 16),
+                                          Icon(Icons.music_note, size: 70, color: AppTheme.cyanPrimary),
+                                          SizedBox(height: 12),
                                           Text(
                                             "REJOICE\nIN THE LORD",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: 24,
+                                              fontSize: 22,
                                               fontWeight: FontWeight.bold,
                                               color: AppTheme.cyanDark,
                                             ),
@@ -165,7 +165,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 32),
+                            const SizedBox(height: 28),
                             // Clean App Title & Subtitle (No 3rd Edition badge)
                             const Text(
                               "REJOICE IN THE LORD",

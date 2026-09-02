@@ -165,8 +165,8 @@ class _HomeScreenState extends State<HomeScreen> {
               borderRadius: BorderRadius.circular(6),
               child: Image.asset(
                 'assets/images/cover.jpg',
-                width: 28,
-                height: 34,
+                width: 32,
+                height: 32,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) =>
                     const Icon(Icons.menu_book, color: Colors.white),
