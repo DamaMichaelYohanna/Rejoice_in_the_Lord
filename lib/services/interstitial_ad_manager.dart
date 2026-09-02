@@ -13,9 +13,9 @@ class InterstitialAdManager {
 
   int _hymnViewCount = 0;
 
-  // Strict Limits (User Requirements)
-  static const int maxAdsPerDay = 2; // Strict limit: Max 2 interstitial ads per day per user
-  static const int minHymnsBeforeAd = 5; // Show only after viewing at least 5 hymns
+  // Dynamic Limits: Relaxed in test mode to allow verification, strict in production
+  int get maxAdsPerDay => AdConfig.useTestAds ? 999 : 2;
+  int get minHymnsBeforeAd => AdConfig.useTestAds ? 1 : 5;
 
   static const String _keyAdDate = "interstitial_ad_last_date";
   static const String _keyAdCount = "interstitial_ad_daily_count";
@@ -26,18 +26,24 @@ class InterstitialAdManager {
 
     // Check if daily quota is already reached before loading from network
     bool isQuotaReached = await _isDailyQuotaReached();
-    if (isQuotaReached) return;
+    if (isQuotaReached) {
+      debugPrint('ℹ️ [AdMob] Daily interstitial quota reached ($maxAdsPerDay/day). Skipping preload.');
+      return;
+    }
 
     _isAdLoading = true;
+    debugPrint('⏳ [AdMob] Preloading Interstitial Ad: ${AdConfig.interstitialAdUnitId}...');
     InterstitialAd.load(
       adUnitId: AdConfig.interstitialAdUnitId,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
+          debugPrint('🟢 [AdMob] Interstitial Ad loaded successfully: ${ad.adUnitId}');
           _interstitialAd = ad;
           _isAdLoading = false;
         },
         onAdFailedToLoad: (error) {
+          debugPrint('🔴 [AdMob] Interstitial Ad failed to load: code=${error.code}, message="${error.message}", domain="${error.domain}"');
           _interstitialAd = null;
           _isAdLoading = false;
         },
@@ -93,9 +99,11 @@ class InterstitialAdManager {
     await prefs.setInt(_keyAdCount, savedCount);
   }
 
-  /// Attempts to display an interstitial ad if daily limit (max 2/day) and hymn count allow
+  /// Attempts to display an interstitial ad if daily limit and hymn count allow
   void tryShowAd({VoidCallback? onAdClosed}) async {
     bool quotaReached = await _isDailyQuotaReached();
+
+    debugPrint('ℹ️ [AdMob] tryShowAd requested: views=$_hymnViewCount/$minHymnsBeforeAd, adReady=${_interstitialAd != null}, quotaReached=$quotaReached');
 
     if (quotaReached) {
       if (onAdClosed != null) onAdClosed();
@@ -104,22 +112,32 @@ class InterstitialAdManager {
 
     if (_hymnViewCount >= minHymnsBeforeAd && _interstitialAd != null) {
       _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+        onAdShowedFullScreenContent: (ad) {
+          debugPrint('🟢 [AdMob] Interstitial Ad showing full screen.');
+        },
         onAdDismissedFullScreenContent: (ad) async {
+          debugPrint('ℹ️ [AdMob] Interstitial Ad dismissed by user.');
           ad.dispose();
           _interstitialAd = null;
           _hymnViewCount = 0;
           await _recordAdShown();
+          preloadAd();
           if (onAdClosed != null) onAdClosed();
         },
         onAdFailedToShowFullScreenContent: (ad, error) {
+          debugPrint('🔴 [AdMob] Interstitial Ad failed to show: code=${error.code}, message="${error.message}"');
           ad.dispose();
           _interstitialAd = null;
+          preloadAd();
           if (onAdClosed != null) onAdClosed();
         },
       );
 
       _interstitialAd!.show();
     } else {
+      if (_interstitialAd == null && !_isAdLoading) {
+        preloadAd();
+      }
       if (onAdClosed != null) onAdClosed();
     }
   }

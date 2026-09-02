@@ -65,6 +65,7 @@ class _BannerAdFooterState extends State<BannerAdFooter> {
       request: const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (ad) {
+          debugPrint('🟢 [AdMob] Banner Ad loaded successfully: ${ad.adUnitId}');
           if (mounted) {
             setState(() {
               _isAdLoaded = true;
@@ -72,6 +73,7 @@ class _BannerAdFooterState extends State<BannerAdFooter> {
           }
         },
         onAdFailedToLoad: (ad, error) {
+          debugPrint('🔴 [AdMob] Banner Ad failed to load: code=${error.code}, message="${error.message}", domain="${error.domain}"');
           ad.dispose();
           if (mounted) {
             setState(() {
@@ -79,6 +81,9 @@ class _BannerAdFooterState extends State<BannerAdFooter> {
             });
           }
         },
+        onAdOpened: (ad) => debugPrint('ℹ️ [AdMob] Banner Ad opened.'),
+        onAdClosed: (ad) => debugPrint('ℹ️ [AdMob] Banner Ad closed.'),
+        onAdImpression: (ad) => debugPrint('ℹ️ [AdMob] Banner Ad impression recorded.'),
       ),
     );
 

@@ -2,8 +2,11 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 
 class AdConfig {
-  // Set to false for Production live ads, true for Google Test Ads
-  static const bool useTestAds = false;
+  // ===========================================================================
+  // TOGGLE: Set to true for Testing (instant fill, safe for testing on devices)
+  //         Set to false for Production (live ads for Google Play Store release)
+  // ===========================================================================
+  static const bool useTestAds = true;
 
   // ===========================================================================
   // YOUR ADMOB PRODUCTION APP & AD UNIT IDS
