@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         content: const Text(
-          "Welcome to Rejoice in the Lord Catholic Hymnbook!\n\nTo help maintain this application, support future updates, and keep all 700 hymns free for everyone, non-intrusive banner ads are shown at the bottom of pages, and full-screen ads are strictly limited to 2 per day.\n\nThank you for your support!",
+          "Welcome to Rejoice in the Lord Catholic Hymnbook!\n\nTo help maintain this application, support future updates, and keep all hymns free for everyone, non-intrusive banner ads are shown at the bottom of pages, and full-screen ads are strictly limited to 2 per day.\n\nThank you for your support!",
           style: TextStyle(fontSize: 14, height: 1.4),
         ),
         actions: [
@@ -247,7 +247,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Search Input Field
                 TextField(
                   decoration: InputDecoration(
-                    hintText: "Search by Hymn # (1-700) or Title...",
+                    hintText: "Search by Hymn # or Title...",
                     prefixIcon: const Icon(Icons.search, color: AppTheme.cyanPrimary),
                     suffixIcon: _searchQuery.isNotEmpty
                         ? IconButton(
@@ -327,7 +327,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 Text(
                   _showOnlyFavorites
                       ? "Favorite Hymns (${_filteredHymns.length})"
-                      : "Showing ${_filteredHymns.length} Hymns (1 - 700)",
+                      : (_selectedCategory == "All" && _searchQuery.isEmpty
+                          ? "All Hymns (${_filteredHymns.length})"
+                          : "Showing ${_filteredHymns.length} of ${_allHymns.length} Hymns"),
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.bold,

@@ -29,10 +29,10 @@ class _MassProgramScreenState extends State<MassProgramScreen> {
   void initState() {
     super.initState();
     // Default preset picks for demo
-    _entranceHymn = widget.allHymns.firstWhere((h) => h.id == 1, orElse: () => widget.allHymns[0]);
-    _offertoryHymn = widget.allHymns.firstWhere((h) => h.id == 50, orElse: () => widget.allHymns[1]);
-    _communionHymn = widget.allHymns.firstWhere((h) => h.id == 100, orElse: () => widget.allHymns[2]);
-    _recessionalHymn = widget.allHymns.firstWhere((h) => h.id == 300, orElse: () => widget.allHymns[3]);
+    _entranceHymn = widget.allHymns.firstWhere((h) => h.id == 2, orElse: () => widget.allHymns[0]);
+    _offertoryHymn = widget.allHymns.firstWhere((h) => h.id == 4, orElse: () => widget.allHymns[1]);
+    _communionHymn = widget.allHymns.firstWhere((h) => h.id == 12, orElse: () => widget.allHymns[2]);
+    _recessionalHymn = widget.allHymns.firstWhere((h) => h.id == 3, orElse: () => widget.allHymns[3]);
   }
 
   void _pickHymnForSlot(String slotName, Function(Hymn) onSelected) {

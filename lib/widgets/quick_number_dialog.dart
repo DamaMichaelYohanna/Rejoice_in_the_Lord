@@ -48,15 +48,16 @@ class _QuickNumberDialogState extends State<QuickNumberDialog> {
   void _submit() {
     if (_enteredNumber.isEmpty) return;
     int? numVal = int.tryParse(_enteredNumber);
-    if (numVal == null || numVal < 1 || numVal > 700) {
+    final maxHymn = widget.allHymns.isNotEmpty ? widget.allHymns.length : 15;
+    if (numVal == null || numVal < 1 || numVal > maxHymn) {
       setState(() {
-        _errorMessage = "Enter a valid number between 1 and 700";
+        _errorMessage = "Enter a valid number between 1 and $maxHymn";
       });
       return;
     }
 
     final found = widget.allHymns.firstWhere(
-      (h) => h.id == numVal,
+      (h) => h.number == _enteredNumber || h.id == numVal,
       orElse: () => widget.allHymns.first,
     );
 

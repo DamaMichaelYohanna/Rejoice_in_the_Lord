@@ -178,7 +178,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                             ),
                             const SizedBox(height: 6),
                             const Text(
-                              "Catholic Hymn Book • Hymns 1 - 700",
+                              "Catholic Hymn Book",
                               style: TextStyle(
                                 color: Colors.white70,
                                 fontSize: 13,
