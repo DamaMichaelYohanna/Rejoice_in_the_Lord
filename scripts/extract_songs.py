@@ -110,8 +110,24 @@ def parse_single_song(text, filename="", default_number=""):
     if not title:
         title = Path(filename).stem.replace('_', ' ').replace('-', ' ').title()
 
-    # Clean title from OCR typos
-    title = re.sub(r'^[0-9\.\s\-]+', '', title).strip()
+    # Clean title from OCR typos & concatenated words
+    common_concat = [
+        ('ALLOF', 'All Of'), ('ALLIS', 'All Is'), ('INMY', 'In My'), ('OFMY', 'Of My'),
+        ('FORYOU', 'For You'), ('GODIS', 'God Is'), ('HEIS', 'He Is'), ('OURGOD', 'Our God'),
+        ('THELORD', 'The Lord'), ('TOBE', 'To Be'), ('WITHME', 'With Me'), ('WHENI', 'When I'),
+        ('WHATI', 'What I'), ('ANDMY', 'And My'), ('INTOYOUR', 'Into Your'), ('SEETHE', 'See The'),
+        ('THEREIS', 'There Is'), ('THISIS', 'This Is'), ('WHATA', 'What A'), ('ISMY', 'Is My'),
+        ('JESUSCHRIST', 'Jesus Christ'), ('HOLYGHOST', 'Holy Ghost'), ('HOLYSPIRIT', 'Holy Spirit')
+    ]
+    for c_from, c_to in common_concat:
+        title = title.replace(c_from, c_to)
+
+    title = re.sub(r'^[0-9\.\s\-#]+', '', title).strip()
+    if title.isupper() and len(title) > 3:
+        title = title.title()
+    title = re.sub(r'\bO\b', 'O', title)
+    title = re.sub(r'\bI\b', 'I', title)
+
 
     blocks = []
     current_block = []
