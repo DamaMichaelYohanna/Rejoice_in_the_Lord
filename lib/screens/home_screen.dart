@@ -30,21 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _allHymns = HymnsData.getAllHymns();
     _applyFilters();
-    _loadExtractedHymns();
     _checkAndShowAdNoticeDialog();
   }
-
-  void _loadExtractedHymns() async {
-    final extracted = await HymnsData.getExtractedHymns();
-    if (extracted.isNotEmpty && mounted) {
-      setState(() {
-        // Prepend extracted hymns so user sees extracted songs from images at the top
-        _allHymns = [...extracted, ..._allHymns];
-        _applyFilters();
-      });
-    }
-  }
-
 
   void _checkAndShowAdNoticeDialog() async {
     final prefs = await SharedPreferences.getInstance();
