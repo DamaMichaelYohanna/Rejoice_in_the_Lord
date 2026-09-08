@@ -6,7 +6,8 @@ class AdConfig {
   // TOGGLE: Set to true for Testing (instant fill, safe for testing on devices)
   //         Set to false for Production (live ads for Google Play Store release)
   // ===========================================================================
-  static const bool useTestAds = true;
+  static const bool useTestAds = false;
+
 
   // ===========================================================================
   // YOUR ADMOB PRODUCTION APP & AD UNIT IDS
