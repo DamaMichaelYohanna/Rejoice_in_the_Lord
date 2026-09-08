@@ -34,8 +34,9 @@ class HymnsData {
 
   static List<Hymn> getAllHymns() {
     return [
-
+      Hymn(
         id: 1,
+
         number: "1",
         title: "Abba, Father, Send Your Spirit",
         category: "Praise & Worship",
