@@ -285,7 +285,35 @@ class HymnsData {
         title: "All That I Am",
         category: "Offertory",
         stanzas: [
-          "1. All that I am, all that I do,\nall that I'll ever have\nI offer now to You.\nAll that I dream,\nall that I pray,\nall that I'll ever make\nI give to You today.\nTake and sanctify these gifts\nfor Your honor, Lord,\nknowing that I love and serve You\nis enough reward.",
+          "1. All that I am, all that I do,\nall that I'll ever have\nI offer now to You.\nAll that I dream,\nall that I pray,\nall that I'll ever make\nI give to You today.",
+          "2. All that I am, all that I do,\nall that I'll ever have\nI offer now to You.\nTake and sanctify these gifts\nfor Your honor, Lord,\nknowing that I love and serve You\nis enough reward.\nAll that I dream,\nall that I pray,\nall that I'll ever make\nI give to You today.",
+        ],
+      ),
+      Hymn(
+        id: 22,
+        number: "22",
+        title: "All The Earth Proclaim",
+        category: "Praise & Worship",
+        refrain: "All the earth proclaim the Lord, Sing your praise to God.",
+        stanzas: [
+          "1. Serve you the Lord\nheart filled with gladness.\nCome into His Presence,\nsinging for joy.",
+          "2. Know that the Lord\nis our Creator.\nYes, He is our Father,\nwe are His sons.",
+          "3. We are the sheep\nof His green pasture.\nFor we are His people,\nHe is our God.",
+          "4. Enter His gates,\nbringing thanksgiving.\nO enter His courts\nwhile singing His praise.",
+          "5. Our Lord is good,\nHis love enduring.\nHis word is abiding\nnow with all men.",
+          "6. Honor and praise be to\nthe Father,\nthe Son and the Spirit\nworld without end.",
+        ],
+      ),
+      Hymn(
+        id: 23,
+        number: "23",
+        title: "All The Nations Of The Earth",
+        category: "Praise & Worship",
+        refrain: "All the nations of the earth\npraise the Lord who\nbrings to birth\nthe greatest star\nthe smallest flower.\nAlleluia",
+        stanzas: [
+          "1. Let the heavens praise the Lord,\nAlleluia.\nMoon and stars, praise the Lord,\nAlleluia.",
+          "2. Snow-capped mountains,\npraise the Lord, Alleluia.\nRolling hills, praise the Lord,\nAlleluia.",
+          "3. Deep sea water, praise the Lord,\nAlleluia.\nGentle rains, praise the Lord,\nAlleluia.",
         ],
       ),
       Hymn(
