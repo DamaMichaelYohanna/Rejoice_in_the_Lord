@@ -326,6 +326,18 @@ class HymnsData {
         ],
       ),
       Hymn(
+        id: 27,
+        number: "27",
+        title: "All You Peoples",
+        category: "Praise & Worship",
+        refrain: "All you peoples clap your hands and shout for joy.\nThe Lord has made all mankind one.\nSo raise your voices high.",
+        stanzas: [
+          "1. All creation shows the glory of the Lord.\nThe earth proclaims His handiwork.\nThe sky cries out His Word.\nNight and day sing out the glories all about.\nSo praise the Lord with shouts of joy.",
+          "2. The strength of God is great.\nHe rules from sea to sea.\nAnd all creation knows the might and glory of His deeds.\nSo ev'ry living thing, join in now as we sing.\nAnd praise the Lord with shouts of joy.",
+          "3. The King of all the earth has made His message known:\nthat we should offer Him ourselves and ev'rything we own.\nWe do this by the way we live through ev'ry day.\nSo live each day in peace and joy.",
+        ],
+      ),
+      Hymn(
         id: 28,
         number: "28",
         title: "All You Who Seek",
@@ -458,6 +470,18 @@ class HymnsData {
           "3. This meal given by Christ Jesus is real food indeed.\nWhoever shares it will never die.\nHe has eternal life.",
           "4. Help us, Jesus to fully understand the meaning of this meat.\nThat we may always be grateful for your death for the world.",
           "5. Give glory to the Father Almighty, to His Son Jesus Christ, the Lord to the Spirit who dwells in our hearts.",
+        ],
+      ),
+      Hymn(
+        id: 39,
+        number: "39",
+        title: "Ask And You Will Receive",
+        category: "Praise & Worship",
+        refrain: "Ask, and you will receive.\nSeek, and you will find\nKnock, and the door will be opened.\nFor the love of the Lord has no end.",
+        stanzas: [
+          "1. Is there any man here, when his son asks for Bread\nwould turn him away with a stone instead?\nIs there any man here, when his son asks for meat\nwould then give him a poisonous snake to eat?",
+          "2. So, then, how could your Father in heaven above\nwho knows so much more of the ways of love?\nSo then how could your Father refuse what is good\nwhen you ask in the name of the Son He loves?",
+          "3. So whatever you ask Whatever you seek\nWhatever you seek you will receive.\nFor my Father will give to all those who believe\nin the spirit of love that will never end.",
         ],
       ),
       Hymn(
