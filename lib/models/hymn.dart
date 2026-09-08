@@ -21,6 +21,34 @@ class Hymn {
     this.isFavorite = false,
   });
 
+  factory Hymn.fromJson(Map<String, dynamic> json) {
+    return Hymn(
+      id: json['id'] is int ? json['id'] : int.tryParse(json['id'].toString()) ?? 0,
+      number: json['number']?.toString() ?? '',
+      title: json['title']?.toString() ?? 'Untitled Hymn',
+      category: json['category']?.toString() ?? 'General',
+      stanzas: (json['stanzas'] as List<dynamic>?)?.map((e) => e.toString()).toList() ?? [],
+      refrain: json['refrain']?.toString(),
+      keySignature: json['keySignature']?.toString(),
+      tune: json['tune']?.toString(),
+      isFavorite: json['isFavorite'] == true,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'number': number,
+      'title': title,
+      'category': category,
+      'stanzas': stanzas,
+      'refrain': refrain,
+      'keySignature': keySignature,
+      'tune': tune,
+      'isFavorite': isFavorite,
+    };
+  }
+
   Hymn copyWith({
     int? id,
     String? number,
@@ -45,3 +73,4 @@ class Hymn {
     );
   }
 }
+

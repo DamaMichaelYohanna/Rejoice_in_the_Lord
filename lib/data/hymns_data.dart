@@ -1,6 +1,22 @@
+import 'dart:convert';
+import 'package:flutter/services.dart';
 import '../models/hymn.dart';
 
 class HymnsData {
+  static List<Hymn>? _cachedExtractedHymns;
+
+  static Future<List<Hymn>> getExtractedHymns() async {
+    if (_cachedExtractedHymns != null) return _cachedExtractedHymns!;
+    try {
+      final jsonString = await rootBundle.loadString('assets/data/extracted_hymns.json');
+      final List<dynamic> jsonList = json.decode(jsonString);
+      _cachedExtractedHymns = jsonList.map((item) => Hymn.fromJson(item)).toList();
+      return _cachedExtractedHymns!;
+    } catch (e) {
+      return [];
+    }
+  }
+
   static final List<String> categories = [
     "All",
     "Entrance",
@@ -18,7 +34,7 @@ class HymnsData {
 
   static List<Hymn> getAllHymns() {
     return [
-      Hymn(
+
         id: 1,
         number: "1",
         title: "Abba, Father, Send Your Spirit",
