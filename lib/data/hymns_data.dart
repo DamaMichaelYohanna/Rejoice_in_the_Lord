@@ -3156,8 +3156,8 @@ class HymnsData {
         refrain: "So let's all join hands and praise our God.\nYes, love our Lord, Lord, Lord.\nSo let's all join hands and praise our God.\nYes, love our Lord, Lord, Lord.\nGo to our Lord's house.\nSo let's all join hands and praise our God.\nYes, love our Lord who's waiting patiently.",
         stanzas: [
           "1. I'm walking on my way to the Lord\nto my Lord, Lord, Lord to my Lord's house\nI'm walking on my way to the Lord, to my Lord\nwho's waiting there for me.",
-          "2. I'm singing on my way to the Lord...",
-          "3. I'm clapping on my way to the Lord...",
+          "2. I'm singing on my way to the Lord\nto my Lord, Lord, Lord to my Lord's house\nI'm singing on my way to the Lord, to my Lord\nwho's waiting there for me.",
+          "3. I'm clapping on my way to the Lord\nto my Lord, Lord, Lord to my Lord's house\nI'm clapping on my way to the Lord, to my Lord\nwho's waiting there for me.",
         ],
       ),
       Hymn(
